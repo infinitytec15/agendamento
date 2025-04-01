@@ -1,6 +1,12 @@
+from django.db import models
+from apps.users.models import User
+
 class Client(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
-    phone = models.CharField(max_length=20)
     email = models.EmailField()
-    history = JSONField(default=list)  # histórico de agendamentos
+    phone = models.CharField(max_length=20)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name} ({self.email})"
